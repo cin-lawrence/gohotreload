@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: ./app
+      target: builder
+    image: app
+    expose:
+      - "8080"
+    environment:
+      - ENV=dev
+    volumes:
+      - ./app:/go/src/app
+    command: reflex -r "\.go$$" -s -- sh -c "go run ./"
+
